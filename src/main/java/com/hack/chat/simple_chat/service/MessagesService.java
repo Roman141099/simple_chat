@@ -5,8 +5,8 @@ import com.hack.chat.simple_chat.model.DataSource;
 import com.hack.chat.simple_chat.model.Message;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class MessagesService {
@@ -19,6 +19,7 @@ public class MessagesService {
 
     public void saveMessage(long roomKey, Message message){
         try {
+            message.setSendTime(LocalDateTime.now());
             dataSource.putMsg(roomKey, message);
         }catch (Exception e){
             throw new RuntimeException();
