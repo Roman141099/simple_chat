@@ -1,36 +1,35 @@
 package com.hack.chat.simple_chat.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
-
-@Entity
-@Table(name = "messages")
+@Getter
+@Setter
 public class Message {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String content;
+    private int messageId;
+    private String messageContent;
     private LocalDateTime sendTime;
-    private Integer responseId;
-    private String fromUser;
-    private boolean sent;
-//    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "room_id")
-//    private Room room;
+    private long userId;
+    private String userName;
+    private String responseMessage;
+    private String responseUser;
 
     public Message() {
     }
 
-    public Message(int id, String content, LocalDateTime sendTime, Integer responseId, String fromUser, boolean sent) {
-        this.id = id;
-        this.content = content;
+    public Message(int messageId, String messageContent, LocalDateTime sendTime, long userId, String userName, String responseMessage, String responseUser) {
+        this.messageId = messageId;
+        this.messageContent = messageContent;
         this.sendTime = sendTime;
-        this.responseId = responseId;
-        this.fromUser = fromUser;
-        this.sent = sent;
+        this.userId = userId;
+        this.userName = userName;
+        this.responseMessage = responseMessage;
+        this.responseUser = responseUser;
     }
 
     @Override
@@ -38,59 +37,11 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return id == message.id;
+        return messageId == message.messageId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    public Integer getResponseId() {
-        return responseId;
-    }
-
-    public void setResponseId(Integer responseId) {
-        this.responseId = responseId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDateTime getSendTime() {
-        return sendTime;
-    }
-
-    public void setSendTime(LocalDateTime sendTime) {
-        this.sendTime = sendTime;
-    }
-
-    public String getFromUser() {
-        return fromUser;
-    }
-
-    public void setFromUser(String fromUser) {
-        this.fromUser = fromUser;
-    }
-
-    public boolean isSent() {
-        return sent;
-    }
-
-    public void setSent(boolean sent) {
-        this.sent = sent;
+        return Objects.hash(messageId);
     }
 }
